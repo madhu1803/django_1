@@ -1,0 +1,52 @@
+{% extends "post/base.html" %}
+{% block content %}
+<style>
+    body {
+        font-family: "Roboto", sans-serif;
+        font-size: 18px;
+        background-color: #fdfdfd;
+    }
+
+    .head_text {
+        color: white;
+    }
+
+    .card {
+        box-shadow: 0 16px 48px #E3E7EB;
+    }
+
+
+</style>
+
+<header class="masthead" style="background-color:#3D8939;">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class=" col-md-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h3 class=" site-heading my-4 mt-3 text-white"> Welcome to my awesome Blog </h3>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-12 mt-3 ">
+            {% for post in post_list %}
+            <div class="card mb-4 ">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-3">{{ post.title }}</h2>
+                    <img alt="..." class="card-img-top" src="{{ post.photo.url }}">
+                    <p class="card-text text-muted h6 mt-3">{{ post.author }} | {{ post.created_on}} </p>
+                    <p class="card-text mt-4">{{post.content|slice:":200" }}</p>
+                    <a class="btn btn-success mt-3" href="{% url 'post_detail' post.slug  %}">Read More</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{%endblock%}
