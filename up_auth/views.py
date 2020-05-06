@@ -34,6 +34,10 @@ class PostDetail(DetailView):
         return super(PostDetail, self).dispatch(*args, **kwargs)
 
 
+def index(request):
+    return render(request, "base.html", {})
+
+
 # CREATE VIEW
 class PostCrate(CreateView):
     form_class = PostCreate

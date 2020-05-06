@@ -1,13 +1,6 @@
 from django.urls import path
 from . import views
-from user_post_auth.settings import (
-    DEBUG,
-    STATIC_URL,
-    STATIC_ROOT,
-    MEDIA_URL,
-    MEDIA_ROOT,
-)
-from django.conf.urls.static import static
+
 from up_auth.views import (
     PostCrate,
     PostDelete,
@@ -15,12 +8,14 @@ from up_auth.views import (
     PostList,
     PostUpdate,
     LoginView,
+    index,
 )
 
 # app_name = 'up_auth'
 
 urlpatterns = [
     # POST VIEWS URL
+    path("index/", views.index, name="index"),
     path("", PostList.as_view(), name="post_list"),
     path("<slug:slug>/", PostDetail.as_view(), name="post_detail"),
     path("delete/<slug:slug>/", PostDelete.as_view(), name="post_delete"),
@@ -29,6 +24,3 @@ urlpatterns = [
     # Auth View url
     path("up_auth/user_login/", LoginView.as_view(), name="user_login"),
 ]
-if DEBUG:
-    urlpatterns += static(STATIC_URL, document_root=STATIC_ROOT)
-    urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)
